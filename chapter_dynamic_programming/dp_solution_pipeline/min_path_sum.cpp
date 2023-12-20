@@ -42,6 +42,20 @@ int minPathSumDP(std::vector<std::vector<int>> grid) {
   return dp[row][col];
 }
 
+int minPathSumDP1(std::vector<std::vector<int>> grid) {
+  auto row = grid.size();
+  auto col = grid[0].size();
+  std::vector<int> dp(col + 1, 0);
+
+  for (int i = 1; i <= row; ++i) {
+    for (int j = 1; j <= col; ++j) {
+      dp[j] = std::min(dp[j], dp[j - 1]) + grid[i - 1][j - 1];
+    }
+  }
+
+  return dp[col];
+}
+
 int main() {
 //  std::vector<std::vector<int>> grid0 = {
 //          {1, 3, 1, 5},
@@ -50,7 +64,7 @@ int main() {
 //          {4, 3, 5, 2},
 //  };
   constexpr auto ROW = 14;
-  constexpr auto COL = 20;
+  constexpr auto COL = 12;
   std::vector<std::vector<int>> grid0;
   for (int i = 0; i < ROW; ++i) {
     grid0.emplace_back();
@@ -67,14 +81,18 @@ int main() {
   const auto time2{std::chrono::steady_clock::now()};
   auto ret2 = minPathSumDP(grid0);
   const auto time3{std::chrono::steady_clock::now()};
+  auto ret3 = minPathSumDP1(grid0);
+  const auto time4{std::chrono::steady_clock::now()};
 
   const std::chrono::duration<double> time_seconds0{time1 - time0};
   const std::chrono::duration<double> time_seconds1{time2 - time1};
   const std::chrono::duration<double> time_seconds2{time3 - time2};
+  const std::chrono::duration<double> time_seconds3{time4 - time3};
 
   std::cout << ret0 << ", " << time_seconds0.count() << std::endl;
   std::cout << ret1 << ", " << time_seconds1.count() << std::endl;
   std::cout << ret2 << ", " << time_seconds2.count() << std::endl;
+  std::cout << ret3 << ", " << time_seconds3.count() << std::endl;
 
   return 0;
 }
