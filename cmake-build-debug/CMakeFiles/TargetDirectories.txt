@@ -1,3 +1,0 @@
-/Users/tangs/Documents/learn_hello-algo/cmake-build-debug/CMakeFiles/min_path_sum.dir
-/Users/tangs/Documents/learn_hello-algo/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/tangs/Documents/learn_hello-algo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
