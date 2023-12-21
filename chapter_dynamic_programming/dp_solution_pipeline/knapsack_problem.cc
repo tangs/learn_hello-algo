@@ -52,16 +52,15 @@ int knapsackDPComp(std::vector<int> &wgt, std::vector<int> &val, int cap) {
   std::vector<int> dp(cap + 1, 0);
 
   for (int i = 1; i <= size; ++i) {
-    auto dpPrev = dp;
     auto w = wgt[i - 1];
     auto v = val[i - 1];
 
-    for (int j = 1; j <= cap; ++j) {
+    for (int j = cap; j >= 1; --j) {
       if (j < w) {
         continue;
       }
 
-      auto yes = dpPrev[j - w] + v;
+      auto yes = dp[j - w] + v;
       dp[j] = std::max(dp[j], yes);
     }
   }
