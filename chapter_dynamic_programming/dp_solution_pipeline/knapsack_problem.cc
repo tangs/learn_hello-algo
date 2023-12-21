@@ -31,6 +31,7 @@ int knapsackDP(std::vector<int> &wgt, std::vector<int> &val, int cap) {
   for (int i = 1; i <= size; ++i) {
     auto w = wgt[i - 1];
     auto v = val[i - 1];
+
     for (int j = 1; j <= cap; ++j) {
       auto no = dp[i][j] = dp[i - 1][j];
       if (j < w) {
@@ -46,6 +47,28 @@ int knapsackDP(std::vector<int> &wgt, std::vector<int> &val, int cap) {
   return dp[size][cap];
 }
 
+int knapsackDPComp(std::vector<int> &wgt, std::vector<int> &val, int cap) {
+  const auto size = wgt.size();
+  std::vector<int> dp(cap + 1, 0);
+
+  for (int i = 1; i <= size; ++i) {
+    auto dpPrev = dp;
+    auto w = wgt[i - 1];
+    auto v = val[i - 1];
+
+    for (int j = 1; j <= cap; ++j) {
+      if (j < w) {
+        continue;
+      }
+
+      auto yes = dpPrev[j - w] + v;
+      dp[j] = std::max(dp[j], yes);
+    }
+  }
+
+  return dp[cap];
+}
+
 int main() {
   std::vector<int> wgt = {10, 20, 30, 40, 50};
   std::vector<int> val = {50, 120, 150, 210, 240};
@@ -56,6 +79,7 @@ int main() {
   auto ret0 = knapsackDFS(wgt, val, wgt.size() - 1, knapsackCapacity);
   auto ret1 = knapsackDFSMen(wgt, val, men, wgt.size() - 1, knapsackCapacity);
   auto ret2 = knapsackDP(wgt, val, knapsackCapacity);
+  auto ret3 = knapsackDPComp(wgt, val, knapsackCapacity);
 
   return 0;
 }
