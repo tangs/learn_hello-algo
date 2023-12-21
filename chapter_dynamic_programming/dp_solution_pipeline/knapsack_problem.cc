@@ -24,14 +24,14 @@ int knapsackDFSMen(std::vector<int> &wgt, std::vector<int> &val, std::vector<std
   return ret;
 }
 
-int knapsackDP(std::vector<int> &wgt, std::vector<int> &val, int c) {
+int knapsackDP(std::vector<int> &wgt, std::vector<int> &val, int cap) {
   const auto size = wgt.size();
-  std::vector<std::vector<int>> dp(size + 1, std::vector<int>(c + 1, 0));
+  std::vector<std::vector<int>> dp(size + 1, std::vector<int>(cap + 1, 0));
 
   for (int i = 1; i <= size; ++i) {
     auto w = wgt[i - 1];
     auto v = val[i - 1];
-    for (int j = 1; j <= c; ++j) {
+    for (int j = 1; j <= cap; ++j) {
       auto no = dp[i][j] = dp[i - 1][j];
       if (j < w) {
         dp[i][j] = no;
@@ -43,7 +43,7 @@ int knapsackDP(std::vector<int> &wgt, std::vector<int> &val, int c) {
     }
   }
 
-  return dp[size][c];
+  return dp[size][cap];
 }
 
 int main() {
