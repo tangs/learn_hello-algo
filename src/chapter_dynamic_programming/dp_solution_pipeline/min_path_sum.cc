@@ -1,5 +1,6 @@
 #include <chrono>
 #include <iostream>
+#include <min_path_sum.h>
 
 int minPathSumDFS(std::vector<std::vector<int>> &grid, int i, int j) {
   if (i == 0 && j == 0) return grid[i][j];
