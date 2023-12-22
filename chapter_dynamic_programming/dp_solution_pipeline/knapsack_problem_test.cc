@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
-#include <cstdlib>
-#include <ctime>
+#include <random>
 
 #include "knapsack_problem.h"
 
@@ -24,22 +23,28 @@ TEST(exp_test, BasicAssertions) {
 }
 
 TEST(test1, BasicAssertions) {
-  std::srand(std::time(nullptr));
+  std::random_device rd;
+  std::mt19937 mt(rd());
   for (int i = 0; i < 1000; ++i) {
     std::vector<int> wgt;
     std::vector<int> val;
 
-    int wgtCnt = std::rand() % 50 + 5;
-    int valCnt = std::rand() % 10000 + 1;
+    int wgtCnt = std::uniform_int_distribution<int>(5, 100)(mt);
+    int valCnt = std::uniform_int_distribution<int>(1, 10000)(mt);
+    int knapsackCapacity = std::uniform_int_distribution<int>(5, 1000)(mt);
 
-    for (int j = 0; j < wgtCnt; ++j) wgt.push_back(std::rand() % 10000 + 1);
-    for (int j = 0; j < valCnt; ++j) val.push_back(std::rand() % 10000 + 1);
+    std::uniform_int_distribution<int> dist(1, 10000);
 
-    int knapsackCapacity = std::rand() % 1000 + 5;
+    wgt.reserve(wgtCnt);
+    for (int j = 0; j < wgtCnt; ++j) wgt.push_back(dist(mt));
+
+    val.reserve(valCnt);
+    for (int j = 0; j < valCnt; ++j) val.push_back(dist(mt));
+
     std::vector<std::vector<int>> men(wgt.size(), std::vector<int>(knapsackCapacity + 1, -1));
 
-    auto ret0 = knapsackDFS(wgt, val, wgt.size() - 1, knapsackCapacity);
-    auto ret1 = knapsackDFSMen(wgt, val, men, wgt.size() - 1, knapsackCapacity);
+    auto ret0 = knapsackDFS(wgt, val, static_cast<int>(wgt.size() - 1), knapsackCapacity);
+    auto ret1 = knapsackDFSMen(wgt, val, men,  static_cast<int>(wgt.size() - 1), knapsackCapacity);
     auto ret2 = knapsackDP(wgt, val, knapsackCapacity);
     auto ret3 = knapsackDPComp(wgt, val, knapsackCapacity);
 
