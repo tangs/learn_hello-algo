@@ -13,14 +13,19 @@ FetchContent_MakeAvailable(googletest)
 
 #add_executable(min_path_sum  chapter_dynamic_programming/dp_solution_pipeline/min_path_sum.cc)
 #add_executable(knapsack_problem chapter_dynamic_programming/dp_solution_pipeline/knapsack_problem.cc)
+enable_testing()
 
-
+# test.
 add_executable(
         knapsack_problem_test
         chapter_dynamic_programming/dp_solution_pipeline/knapsack_problem.cc
         chapter_dynamic_programming/dp_solution_pipeline/knapsack_problem_test.cc
 )
 target_link_libraries(knapsack_problem_test GTest::gtest_main)
+add_test(
+        NAME knapsack_problem_test
+        COMMAND knapsack_problem_test
+)
 
 include(GoogleTest)
 gtest_discover_tests(knapsack_problem_test)

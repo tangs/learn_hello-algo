@@ -24,7 +24,7 @@ TEST(exp_test, BasicAssertions) {
 
 TEST(test1, BasicAssertions) {
   std::srand(std::time(nullptr));
-  for (int i = 0; i < 100; ++i) {
+  for (int i = 0; i < 1000; ++i) {
     std::vector<int> wgt;
     std::vector<int> val;
 
