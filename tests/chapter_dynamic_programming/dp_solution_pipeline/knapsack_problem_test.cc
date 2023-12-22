@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 #include <random>
 
-#include "../../../src/chapter_dynamic_programming/dp_solution_pipeline/knapsack_problem.h"
+#include "knapsack_problem.h"
 
-TEST(exp_test, BasicAssertions) {
+TEST(knapsack_problem_exp_testing, BasicAssertions) {
   std::vector<int> wgt = {10, 20, 30, 40, 50};
   std::vector<int> val = {50, 120, 150, 210, 240};
   const auto knapsackCapacity = 50;
@@ -22,7 +22,7 @@ TEST(exp_test, BasicAssertions) {
   EXPECT_EQ(ret3, 270);
 }
 
-TEST(test1, BasicAssertions) {
+TEST(knapsack_problem_rand_testing, BasicAssertions) {
   std::random_device rd;
   std::mt19937 mt(rd());
   for (int i = 0; i < 1000; ++i) {

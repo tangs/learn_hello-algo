@@ -21,6 +21,14 @@ include_directories(
 
 # test.
 enable_testing()
+
+add_executable(
+        min_path_sum_test
+        ${SRC_PATH}/min_path_sum.cc
+        ${TESTS_PATH}/min_path_sum_test.cc
+)
+target_link_libraries(min_path_sum_test GTest::gtest_main)
+
 add_executable(
         knapsack_problem_test
         ${SRC_PATH}/knapsack_problem.cc
@@ -29,4 +37,5 @@ add_executable(
 target_link_libraries(knapsack_problem_test GTest::gtest_main)
 
 include(GoogleTest)
+gtest_discover_tests(min_path_sum_test)
 gtest_discover_tests(knapsack_problem_test)
