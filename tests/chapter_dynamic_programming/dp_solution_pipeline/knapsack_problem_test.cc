@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <random>
 
-#include "knapsack_problem.h"
+#include "../../../src/chapter_dynamic_programming/dp_solution_pipeline/knapsack_problem.h"
 
 TEST(exp_test, BasicAssertions) {
   std::vector<int> wgt = {10, 20, 30, 40, 50};
