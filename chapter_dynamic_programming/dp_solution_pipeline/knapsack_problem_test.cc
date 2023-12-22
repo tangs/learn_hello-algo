@@ -8,11 +8,12 @@ TEST(exp_test, BasicAssertions) {
   std::vector<int> wgt = {10, 20, 30, 40, 50};
   std::vector<int> val = {50, 120, 150, 210, 240};
   const auto knapsackCapacity = 50;
+  const auto wgtSize = static_cast<int>(wgt.size());
 
   std::vector<std::vector<int>> men(wgt.size(), std::vector<int>(knapsackCapacity + 1, -1));
 
-  auto ret0 = knapsackDFS(wgt, val, wgt.size() - 1, knapsackCapacity);
-  auto ret1 = knapsackDFSMen(wgt, val, men, wgt.size() - 1, knapsackCapacity);
+  auto ret0 = knapsackDFS(wgt, val, wgtSize - 1, knapsackCapacity);
+  auto ret1 = knapsackDFSMen(wgt, val, men, wgtSize - 1, knapsackCapacity);
   auto ret2 = knapsackDP(wgt, val, knapsackCapacity);
   auto ret3 = knapsackDPComp(wgt, val, knapsackCapacity);
 
